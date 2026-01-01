@@ -1,548 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Add Employee Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Add Employee Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root {
-      --primary: #2A00B2;
-      --bg: #F1F3F7;
-      --card: #E5E8FF;
-      --border: #D2D5DA;
-      --label: #6D7280;
-      --error: #d32f2f;
-    }
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    * {
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+body{
+  margin:0;
+  background:#F5F6FA;
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-    }
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:0;left:0;
+  width:70px;
+  height:100vh;
+  background:#2F00B5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:20px;
+  gap:28px;
+}
+.sidebar i{
+  color:#fff;
+  font-size:20px;
+}
+.logo{
+  width:34px;
+  height:34px;
+  background:#fff;
+  border-radius:6px;
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+/* ===== HEADER ===== */
+.header{
+  margin-left:70px;
+  height:64px;
+  background:#EFEFEF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:0 2px 4px rgba(0,0,0,.15);
+}
+.header-title{
+  font-weight:600;
+  letter-spacing:1px;
+}
+.header-right{
+  position:absolute;
+  right:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+.header-right img{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+}
 
-    .container {
-      max-width: 1400px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+/* ===== MAIN ===== */
+.main{
+  margin-left:70px;
+  padding:30px;
+}
 
-    .card {
-      background: var(--card);
-      border-radius: 10px;
-      box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-      padding: 20px;
-      display: flex;
-      gap: 20px;
-    }
+/* BACK BUTTON */
+.back{
+  font-size:20px;
+  color:#666;
+  margin-bottom:20px;
+  cursor:pointer;
+}
 
-   
-    .left {
-      flex: 2;
-      min-width: 20rem;
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-    }
+/* ===== PROFILE CARD ===== */
+.card{
+  background:#E9ECFF;
+  border-radius:12px;
+  padding:30px;
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap:30px;
+}
 
-    .back-link {
-      display: inline-block;
-      animation: bounce 1.5s infinite;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+/* LEFT PROFILE */
+.profile-left{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.avatar{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:#FFF3E0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.avatar img{
+  width:110px;
+}
+.profile-text{
+  margin-top:20px;
+  font-weight:600;
+}
 
-    @keyframes bounce {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(-5px); }
-    }
+/* RIGHT FORM */
+.profile-right h3{
+  margin-top:0;
+  font-size:16px;
+}
+.form-group{
+  margin-bottom:16px;
+}
+label{
+  display:block;
+  font-size:13px;
+  color:#555;
+  margin-bottom:6px;
+}
+label span{color:red}
+input, select{
+  width:100%;
+  padding:10px 12px;
+  border:1.8px solid #D1D5DB;
+  border-radius:6px;
+  font-size:14px;
+}
+input:focus, select:focus{
+  outline:none;
+  border-color:#2F00B5;
+}
 
-    .avatar {
-      width: 60%;
-      max-width: 220px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: #ddd;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 64px;
-      color: #999;
-    }
+/* PASSWORD */
+.password-wrap{
+  position:relative;
+}
+.password-wrap i{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#1DB954;
+}
 
-    .left h2 {
-      margin: 10px 0 5px;
-    }
+/* PHONE */
+.phone-row{
+  display:flex;
+  gap:10px;
+}
 
-    .muted {
-      color: #777;
-      font-size: 14px;
-    }
+/* ===== PRIVILEGES SECTION ===== */
+.privileges-card{
+  background:#E9ECFF;
+  margin-top:30px;
+  padding:30px;
+  border-radius:12px;
+}
+.privileges-card h3{
+  margin-top:0;
+  font-size:16px;
+}
 
-    
-    .middle {
-      flex: 3;
-      min-width: 50rem;
-      border-left: 1px solid #ddd;
-      padding-left: 20px;
-    }
+/* AUTH GRID */
+.auth-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:10px;
+}
+.auth-grid.reports{
+  grid-template-columns:repeat(2,1fr);
+}
+.auth-box{
+  background:#fff;
+  border:1.5px solid #D1D5DB;
+  border-radius:4px;
+  padding:10px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-   
-    .right {
-      flex: 1;
-      border-left: 1px solid #ddd;
-      padding-left: 20px;
-    }
+/* BUTTONS */
+.action-buttons{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin-top:25px;
+}
+.btn-save{
+  background:#2F00B5;
+  color:#fff;
+  width:120px;
+  height:42px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn-cancel{
+  background:#fff;
+  width:120px;
+  height:42px;
+  border:1.5px solid #D1D5DB;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    h3 {
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      color: var(--label);
-      margin-bottom: 5px;
-    }
-
-    .req::after {
-      content: " *";
-      color: red;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      background: #fff;
-    }
-
-    .field {
-      margin-bottom: 15px;
-    }
-
-    .error {
-      font-size: 13px;
-      color: var(--error);
-      margin-top: 4px;
-    }
-
-    
-    .password-wrap {
-      position: relative;
-    }
-
-    .copy-btn {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      color: #777;
-    }
-
-    .copy-btn.copied {
-      color: green;
-    }
-
-   
-    .phone {
-      display: flex;
-      gap: 10px;
-    }
-
-    .phone select {
-      max-width: 140px;
-    }
-
-   
-    .auth-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .check {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      padding: 6px;
-      border-radius: 6px;
-    }
-
-    .check input {
-      accent-color: var(--primary);
-    }
-
-
-    .actions {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    button {
-      width: 127px;
-      height: 48px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .save {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-    }
-
-    .cancel {
-      background: #fff;
-      border: 1px solid #ccc;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #333;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 6px;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-
-    .toast.show {
-      opacity: 1;
-    }
-
-    @media (max-width: 1020px) {
-      .card {
-        flex-direction: column;
-      }
-      .middle {
-        min-width: auto;
-        border-left: none;
-        padding-left: 0;
-      }
-      .right {
-        border-left: none;
-        padding-left: 0;
-      }
-      .avatar {
-        width: 100px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .auth-grid {
-        grid-template-columns: 1fr;
-      }
-      .phone {
-        flex-direction: column;
-      }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .card{grid-template-columns:1fr}
+  .auth-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .auth-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-  <div class="card">
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo"></div>
+  <i class="fa-solid fa-table-cells"></i>
+  <i class="fa-regular fa-square-check"></i>
+  <i class="fa-regular fa-file-lines"></i>
+  <i class="fa-solid fa-gear"></i>
+</div>
 
-    <div class="left">
-      <a class="back-link" href="http://127.0.0.1:5500/operations/employee-management.html" aria-label="Back">
-        ←
-      </a>
-
-      <div class="avatar" aria-hidden="true">👤</div>
-      <h2>New Employee</h2>
-      <div class="muted">Not Assigned</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">EMPLOYEE MANAGEMENT</div>
+  <div class="header-right">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <img src="https://i.pravatar.cc/100?img=3">
+    <div>
+      <strong>Initial User</strong><br>
+      <small>Administrator</small>
     </div>
-
-
-    <div class="middle">
-      <h3>Profile View</h3>
-
-      <div class="field">
-        <label class="req">Full Name</label>
-        <input id="fullName" aria-required="true" />
-        <div class="error" id="errFullName"></div>
-      </div>
-
-      <div class="field">
-        <label class="req">Employee ID</label>
-        <input id="empId" />
-        <div class="error" id="errEmpId"></div>
-      </div>
-
-      <div class="field">
-        <label class="req">Password</label>
-        <div class="password-wrap">
-          <input id="password" readonly />
-          <span class="copy-btn" tabindex="0" role="button" aria-label="Copy Password">📋</span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="req">Primary Contact Number</label>
-        <div class="phone">
-          <select id="cc1"></select>
-          <input id="phone1" />
-        </div>
-        <div class="error" id="errPhone1"></div>
-      </div>
-
-      <div class="field">
-        <label>Secondary Contact Number</label>
-        <div class="phone">
-          <select id="cc2"></select>
-          <input id="phone2" />
-        </div>
-        <div class="error" id="errPhone2"></div>
-      </div>
-    </div>
-
-    <div class="right">
-      <h3>Profile Settings & Privileges</h3>
-
-      <div class="field">
-        <label class="req">Role</label>
-        <select id="role">
-          <option value="">Select</option>
-          <option>Technician</option>
-          <option>Supervisor</option>
-          <option>Manager</option>
-          <option>Advisor</option>
-        </select>
-        <div class="error" id="errRole"></div>
-      </div>
-
-      <div class="auth-grid" id="authGrid"></div>
-
-      <div class="field">
-        <label class="req">Select Entry Page</label>
-        <select id="entryPage"></select>
-        <div class="error" id="errEntry"></div>
-      </div>
-
-      <div class="field">
-        <label class="req">Designation</label>
-        <select id="designation">
-          <option value="">Select</option>
-          <option>Technician</option>
-          <option>Supervisor</option>
-          <option>Manager</option>
-          <option>Foreman</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="field" id="otherDesWrap" style="display:none;">
-        <input id="otherDes" placeholder="Add Designation" />
-        <div class="error" id="errDes"></div>
-      </div>
-
-      <div class="field">
-        <label class="req">Employee Type</label>
-        <select id="empType">
-          <option value="">Select</option>
-          <option>Permanent</option>
-          <option>Contract</option>
-          <option>Temporary</option>
-        </select>
-      </div>
-
-      <div class="field" id="companyWrap" style="display:none;">
-        <select id="company">
-          <option value="">Select Company</option>
-          <option>ABC Motors</option>
-          <option>XYZ Auto</option>
-          <option>Premium Cars</option>
-          <option>Elite Service</option>
-          <option>Other</option>
-        </select>
-        <div class="error" id="errCompany"></div>
-      </div>
-
-      <div class="field" id="otherCompanyWrap" style="display:none;">
-        <input id="otherCompany" placeholder="Add Company" />
-      </div>
-    </div>
-  </div>
-
-  <div class="actions">
-    <button class="save" id="saveBtn">Save</button>
-    <button class="cancel" id="cancelBtn">Cancel</button>
   </div>
 </div>
 
-<div class="toast" id="toast">Employee added successfully</div>
+<!-- MAIN CONTENT -->
+<div class="main">
 
-<script>
+  <div class="back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
 
-  const vehicleMgmt = true;
-  const timeMgmt = true;
+  <!-- PROFILE VIEW -->
+  <div class="card">
+    <div class="profile-left">
+      <div class="avatar">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+      </div>
+      <div class="profile-text">New Employee</div>
+    </div>
 
-  const authList = [
-    "Dashboard",
-    "Services",
-    "Services Overview",
-    "Approvals",
-    "Manual Time Entry",
-    "Employee Management",
-    "Vehicle Management",
-    "Settings"
-  ];
+    <div class="profile-right">
+      <h3>Profile View</h3>
 
-  const authGrid = document.getElementById("authGrid");
-  authList.forEach(a => {
-    if (!vehicleMgmt && a === "Vehicle Management") return;
-    if (!timeMgmt && (a === "Services" || a === "Manual Time Entry")) return;
+      <div class="form-group">
+        <label>Full Name <span>*</span></label>
+        <input placeholder="Full Name">
+      </div>
 
-    const div = document.createElement("label");
-    div.className = "check";
-    div.innerHTML = `<input type="checkbox" value="${a}"> ${a}`;
-    authGrid.appendChild(div);
-  });
+      <div class="form-group">
+        <label>EmployeeId <span>*</span></label>
+        <input placeholder="EmployeeId">
+      </div>
 
-  const role = document.getElementById("role");
-  role.addEventListener("change", () => {
-    const forced = ["Dashboard","Services","Services Overview","Approvals"];
-    document.querySelectorAll("#authGrid input").forEach(c => {
-      if (["Manager","Advisor"].includes(role.value) && forced.includes(c.value)) {
-        c.checked = true;
-        c.disabled = true;
-      } else {
-        c.disabled = false;
-      }
-    });
-    updateEntry();
-  });
+      <div class="form-group">
+        <label>Password <span>*</span></label>
+        <div class="password-wrap">
+          <input value="003243_" readonly>
+          <i class="fa-solid fa-copy"></i>
+        </div>
+      </div>
 
-  document.querySelectorAll("#authGrid input").forEach(c => {
-    c.addEventListener("change", updateEntry);
-  });
+      <div class="form-group">
+        <label>Primary Contact Number <span>*</span></label>
+        <div class="phone-row">
+          <select><option>+971</option><option>+91</option></select>
+          <input placeholder="Primary Contact Number">
+        </div>
+      </div>
 
-  function updateEntry() {
-    const entry = document.getElementById("entryPage");
-    entry.innerHTML = `<option value="">Select</option>`;
-    document.querySelectorAll("#authGrid input:checked").forEach(c => {
-      if (c.value !== "Approvals") {
-        entry.innerHTML += `<option>${c.value}</option>`;
-      }
-    });
-  }
+      <div class="form-group">
+        <label>Secondary Contact Number</label>
+        <div class="phone-row">
+          <select><option>+971</option><option>+91</option></select>
+          <input placeholder="Secondary Contact Number">
+        </div>
+      </div>
+    </div>
+  </div>
 
-  const codes = [
-    ["+971","🇦🇪 UAE"],["+91","🇮🇳 India"],["+1","🇺🇸 USA"],["+44","🇬🇧 UK"],
-    ["+61","🇦🇺 AUS"],["+81","🇯🇵 JP"],["+49","🇩🇪 DE"],["+33","🇫🇷 FR"]
-  ];
+  <!-- PROFILE SETTINGS & PRIVILEGES -->
+  <div class="privileges-card">
+    <h3>Profile Settings & Privileges</h3>
 
-  function fillCodes(sel) {
-    codes.forEach(c => {
-      const o = document.createElement("option");
-      o.value = c[0];
-      o.textContent = c[1] + " " + c[0];
-      if (c[0] === "+971") o.selected = true;
-      sel.appendChild(o);
-    });
-  }
+    <div class="form-group">
+      <label>Role <span>*</span></label>
+      <select>
+        <option>-- Select --</option>
+        <option>Technician</option>
+        <option>Supervisor</option>
+        <option>Manager</option>
+        <option>Advisor</option>
+      </select>
+    </div>
 
-  fillCodes(cc1);
-  fillCodes(cc2);
+    <div class="form-group">
+      <label>Authorization <span>*</span></label>
+      <div class="auth-grid">
+        <label class="auth-box"><input type="checkbox"> Employee Management</label>
+        <label class="auth-box"><input type="checkbox"> Service Management</label>
+        <label class="auth-box"><input type="checkbox"> Manual Time Entry</label>
+        <label class="auth-box"><input type="checkbox"> Services</label>
 
-  empId.addEventListener("input", () => {
-    if (!empId.value.includes(" ")) {
-      password.value = Math.floor(Math.random()*10000) + "_" + empId.value;
-    }
-  });
+        <label class="auth-box"><input type="checkbox"> Schedule Master</label>
+        <label class="auth-box"><input type="checkbox"> Services Overview</label>
+        <label class="auth-box"><input type="checkbox"> Spareparts Management</label>
+        <label class="auth-box"><input type="checkbox"> Supplier Management</label>
 
-  document.querySelector(".copy-btn").onclick = () => {
-    navigator.clipboard.writeText(password.value);
-    const btn = document.querySelector(".copy-btn");
-    btn.classList.add("copied");
-    setTimeout(()=>btn.classList.remove("copied"),5000);
-  };
+        <label class="auth-box"><input type="checkbox"> Vehicle Management</label>
+        <label class="auth-box"><input type="checkbox"> Holiday Master</label>
+      </div>
+    </div>
 
-  designation.onchange = () => {
-    otherDesWrap.style.display = designation.value === "Other" ? "block" : "none";
-  };
+    <div class="form-group">
+      <label>Reports</label>
+      <div class="auth-grid reports">
+        <label class="auth-box"><input type="checkbox"> Vehicle Report</label>
+        <label class="auth-box"><input type="checkbox"> Employee Report</label>
+      </div>
+    </div>
 
-  empType.onchange = () => {
-    companyWrap.style.display = empType.value === "Contract" ? "block" : "none";
-  };
+    <div class="form-group">
+      <label>Select entry page <span>*</span></label>
+      <select><option>Select Entry Page</option></select>
+    </div>
 
-  company.onchange = () => {
-    otherCompanyWrap.style.display = company.value === "Other" ? "block" : "none";
-  };
+    <div class="form-group">
+      <label>Designation <span>*</span></label>
+      <select><option>Select Designation</option></select>
+    </div>
 
-  saveBtn.onclick = () => {
-    let valid = true;
-    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+    <div class="form-group">
+      <label>Employee Type <span>*</span></label>
+      <select><option>Select Employee Type</option></select>
+    </div>
 
-    if (!fullName.value) { errFullName.textContent="Required"; valid=false; }
-    if (!empId.value || empId.value.includes(" ")) { errEmpId.textContent="No spaces allowed"; valid=false; }
-    if (!/^\d{9,15}$/.test(phone1.value)) { errPhone1.textContent="Please check your primary mobile number and try again."; valid=false; }
-    if (phone2.value && !/^\d{9,15}$/.test(phone2.value)) { errPhone2.textContent="Invalid secondary number"; valid=false; }
-    if (!role.value) { errRole.textContent="Required"; valid=false; }
-    if (!entryPage.value) { errEntry.textContent="Required"; valid=false; }
+    <div class="action-buttons">
+      <button class="btn-save">Save</button>
+      <button class="btn-cancel">Cancel</button>
+    </div>
+  </div>
 
-    if (designation.value==="Other" && !otherDes.value) { errDes.textContent="Additional Designation information is required"; valid=false; }
-    if (empType.value==="Contract" && (!company.value || (company.value==="Other" && !otherCompany.value))) {
-      errCompany.textContent="Company is required for Contractors";
-      valid=false;
-    }
-
-    if (!valid) return;
-
-    const employee = {
-      fullName: fullName.value,
-      empId: empId.value,
-      password: password.value,
-      primary: cc1.value + "-" + phone1.value,
-      secondary: phone2.value ? cc2.value + "-" + phone2.value : "",
-      role: role.value,
-      auth: [...document.querySelectorAll("#authGrid input:checked")].map(c=>c.value),
-      entryPage: entryPage.value,
-      designation: designation.value==="Other" ? otherDes.value : designation.value,
-      type: empType.value,
-      company: empType.value==="Contract" ? (company.value==="Other"?otherCompany.value:company.value) : ""
-    };
-
-    const data = JSON.parse(localStorage.getItem("employees") || "[]");
-    data.push(employee);
-    localStorage.setItem("employees", JSON.stringify(data));
-
-    toast.classList.add("show");
-    setTimeout(()=>{
-      location.href="http://127.0.0.1:5500/operations/employee-management.html";
-    },1500);
-  };
-
-  cancelBtn.onclick = () => {
-    location.href="http://127.0.0.1:5500/operations/employee-management.html";
-  };
-</script>
+</div>
 </body>
-</html>*/
+</html>
