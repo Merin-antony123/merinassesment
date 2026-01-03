@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Employee Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+body{
+  margin:0;
+  background:#F5F6FA;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:0;left:0;
+  width:70px;
+  height:100vh;
+  background:#2F00B5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:20px;
+  gap:28px;
+}
+.sidebar i{
+  color:#fff;
+  font-size:20px;
+}
+.logo{
+  width:34px;
+  height:34px;
+  background:#fff;
+  border-radius:6px;
+}
+
+/* ===== HEADER ===== */
+.header{
+  margin-left:70px;
+  height:64px;
+  background:#EFEFEF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:0 2px 4px rgba(0,0,0,.15);
+}
+.header-title{
+  font-weight:600;
+  letter-spacing:1px;
+}
+.header-right{
+  position:absolute;
+  right:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+.header-right img{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:70px;
+  padding:30px;
+}
+
+/* BACK BUTTON */
+.back{
+  font-size:20px;
+  color:#666;
+  margin-bottom:20px;
+  cursor:pointer;
+}
+
+/* ===== PROFILE CARD ===== */
+.card{
+  background:#E9ECFF;
+  border-radius:12px;
+  padding:30px;
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap:30px;
+}
+
+/* LEFT PROFILE */
+.profile-left{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.avatar{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:#FFF3E0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.avatar img{
+  width:110px;
+}
+.profile-text{
+  margin-top:20px;
+  font-weight:600;
+}
+
+/* RIGHT FORM */
+.profile-right h3{
+  margin-top:0;
+  font-size:16px;
+}
+.form-group{
+  margin-bottom:16px;
+}
+label{
+  display:block;
+  font-size:13px;
+  color:#555;
+  margin-bottom:6px;
+}
+label span{color:red}
+input, select{
+  width:100%;
+  padding:10px 12px;
+  border:1.8px solid #D1D5DB;
+  border-radius:6px;
+  font-size:14px;
+}
+input:focus, select:focus{
+  outline:none;
+  border-color:#2F00B5;
+}
+
+/* PASSWORD */
+.password-wrap{
+  position:relative;
+}
+.password-wrap i{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#1DB954;
+}
+
+/* PHONE */
+.phone-row{
+  display:flex;
+  gap:10px;
+}
+
+/* ===== PRIVILEGES SECTION ===== */
+.privileges-card{
+  background:#E9ECFF;
+  margin-top:30px;
+  padding:30px;
+  border-radius:12px;
+}
+.privileges-card h3{
+  margin-top:0;
+  font-size:16px;
+}
+
+/* AUTH GRID */
+.auth-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:10px;
+}
+.auth-grid.reports{
+  grid-template-columns:repeat(2,1fr);
+}
+.auth-box{
+  background:#fff;
+  border:1.5px solid #D1D5DB;
+  border-radius:4px;
+  padding:10px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* BUTTONS */
+.action-buttons{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin-top:25px;
+}
+.btn-save{
+  background:#2F00B5;
+  color:#fff;
+  width:120px;
+  height:42px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn-cancel{
+  background:#fff;
+  width:120px;
+  height:42px;
+  border:1.5px solid #D1D5DB;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .card{grid-template-columns:1fr}
+  .auth-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .auth-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo"></div>
+  <i class="fa-solid fa-table-cells"></i>
+  <i class="fa-regular fa-square-check"></i>
+  <i class="fa-regular fa-file-lines"></i>
+  <i class="fa-solid fa-gear"></i>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">EMPLOYEE MANAGEMENT</div>
+  <div class="header-right">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <img src="https://i.pravatar.cc/100?img=3">
+    <div>
+      <strong>Initial User</strong><br>
+      <small>Administrator</small>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <div class="back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+
+  <!-- PROFILE VIEW -->
+  <div class="card">
+    <div class="profile-left">
+      <div class="avatar">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+      </div>
+      <div class="profile-text">New Employee</div>
+    </div>
+
+    <div class="profile-right">
+      <h3>Profile View</h3>
+
+      <div class="form-group">
+        <label>Full Name <span>*</span></label>
+        <input placeholder="Full Name">
+      </div>
+
+      <div class="form-group">
+        <label>EmployeeId <span>*</span></label>
+        <input placeholder="EmployeeId">
+      </div>
+
+      <div class="form-group">
+        <label>Password <span>*</span></label>
+        <div class="password-wrap">
+          <input value="003243_" readonly>
+          <i class="fa-solid fa-copy"></i>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Primary Contact Number <span>*</span></label>
+        <div class="phone-row">
+          <select><option>+971</option><option>+91</option></select>
+          <input placeholder="Primary Contact Number">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Secondary Contact Number</label>
+        <div class="phone-row">
+          <select><option>+971</option><option>+91</option></select>
+          <input placeholder="Secondary Contact Number">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE SETTINGS & PRIVILEGES -->
+  <div class="privileges-card">
+    <h3>Profile Settings & Privileges</h3>
+
+    <div class="form-group">
+      <label>Role <span>*</span></label>
+      <select>
+        <option>-- Select --</option>
+        <option>Technician</option>
+        <option>Supervisor</option>
+        <option>Manager</option>
+        <option>Advisor</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Authorization <span>*</span></label>
+      <div class="auth-grid">
+        <label class="auth-box"><input type="checkbox"> Employee Management</label>
+        <label class="auth-box"><input type="checkbox"> Service Management</label>
+        <label class="auth-box"><input type="checkbox"> Manual Time Entry</label>
+        <label class="auth-box"><input type="checkbox"> Services</label>
+
+        <label class="auth-box"><input type="checkbox"> Schedule Master</label>
+        <label class="auth-box"><input type="checkbox"> Services Overview</label>
+        <label class="auth-box"><input type="checkbox"> Spareparts Management</label>
+        <label class="auth-box"><input type="checkbox"> Supplier Management</label>
+
+        <label class="auth-box"><input type="checkbox"> Vehicle Management</label>
+        <label class="auth-box"><input type="checkbox"> Holiday Master</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Reports</label>
+      <div class="auth-grid reports">
+        <label class="auth-box"><input type="checkbox"> Vehicle Report</label>
+        <label class="auth-box"><input type="checkbox"> Employee Report</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Select entry page <span>*</span></label>
+      <select><option>Select Entry Page</option></select>
+    </div>
+
+    <div class="form-group">
+      <label>Designation <span>*</span></label>
+      <select><option>Select Designation</option></select>
+    </div>
+
+    <div class="form-group">
+      <label>Employee Type <span>*</span></label>
+      <select><option>Select Employee Type</option></select>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-save">Save</button>
+      <button class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
